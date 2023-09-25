@@ -1,21 +1,26 @@
-import { SyntheticEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Dataset from "../data/Uncountable Front End Dataset.json";
-import { IExperimentData, IExperiments } from "../types/dataset";
+import {
+  IExperimentData,
+  IExperiments,
+  Inputs,
+  Outputs,
+} from "../types/dataset";
 
 export const useDataset = () => {
   const [tabValue, setTabValue] = useState(0);
 
-  const handleTabChange = (event: SyntheticEvent, newTabValue: number) => {
-    setTabValue(newTabValue);
-  };
-
   const [experiments, setExperiments] = useState<IExperiments>({});
 
+  const [experimentList, setExperimentList] = useState<string[]>([]);
+  const [selectedExperiment, setSelectedExperiment] = useState<string>("");
   const [activeExperiment, setActiveExperiment] =
     useState<IExperimentData | null>();
 
-  const [selectedExperiment, setSelectedExperiment] = useState<string>("");
-  const [experimentList, setExperimentList] = useState<string[]>([]);
+  const [selectedInput, setSelectedInput] = useState<string>(Inputs.POLYMER_1);
+  const [selectedOutput, setSelectedOutput] = useState<string>(
+    Outputs.VISCOSITY
+  );
 
   useEffect(() => {
     setExperiments(Dataset);
@@ -38,11 +43,16 @@ export const useDataset = () => {
 
   return {
     tabValue,
-    handleTabChange,
+    setTabValue,
     activeExperiment,
     selectedExperiment,
     setSelectedExperiment,
     experimentList,
     onView,
+    experiments,
+    selectedInput,
+    setSelectedInput,
+    selectedOutput,
+    setSelectedOutput,
   };
 };

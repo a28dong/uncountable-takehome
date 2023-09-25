@@ -14,6 +14,8 @@ import styled from "styled-components";
 import { Color } from "../styles/color";
 import { Spacer } from "../components/Spacer";
 import { IExperimentData, Inputs, Outputs } from "../types/dataset";
+import { MainWrapper } from "../components/wrappers/main";
+import { InputWrapper } from "../components/wrappers/input";
 
 interface IOverviewView {
   activeExperiment: IExperimentData | null | undefined;
@@ -118,9 +120,6 @@ const OverviewView = (props: IOverviewView) => {
               setSelectedExperiment(event.target.value as string)
             }
           >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
             {experimentList.map((experiment) => {
               return (
                 <MenuItem key={experiment} value={experiment}>
@@ -137,24 +136,6 @@ const OverviewView = (props: IOverviewView) => {
     </MainWrapper>
   );
 };
-
-const MainWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
-
-const InputWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  background-color: ${Color.bubble};
-  padding: 24px;
-  border-radius: 10px;
-  gap: 16px;
-`;
 
 const MainOverviewWrapper = styled.div`
   display: flex;

@@ -5,16 +5,23 @@ import OverviewView from "./overview-view";
 import TabPanel from "../components/TabPanel";
 import { Color } from "../styles/color";
 import { useDataset } from "../hooks/useDataset";
+import { SyntheticEvent } from "react";
+import RelationView from "./relations-view";
 
 const UncountablePage = () => {
   const {
     tabValue,
-    handleTabChange,
+    setTabValue,
     activeExperiment,
     selectedExperiment,
     setSelectedExperiment,
     experimentList,
     onView,
+    experiments,
+    selectedInput,
+    setSelectedInput,
+    selectedOutput,
+    setSelectedOutput,
   } = useDataset();
 
   const renderHeader = () => {
@@ -34,10 +41,17 @@ const UncountablePage = () => {
       <Box sx={{ borderBottom: 1, borderColor: `${Color.tabs}` }}>
         <Tabs
           value={tabValue}
-          onChange={handleTabChange}
+          onChange={(event: SyntheticEvent, newTabValue: number) => {
+            setTabValue(newTabValue);
+          }}
           TabIndicatorProps={{
             style: {
               backgroundColor: `${Color.tabs}`,
+            },
+          }}
+          sx={{
+            ".Mui-selected": {
+              color: `${Color.tabs}`,
             },
           }}
         >
@@ -53,6 +67,15 @@ const UncountablePage = () => {
           setSelectedExperiment={setSelectedExperiment}
           experimentList={experimentList}
           onView={onView}
+        />
+      </TabPanel>
+      <TabPanel value={tabValue} index={1}>
+        <RelationView
+          experiments={experiments}
+          selectedInput={selectedInput}
+          setSelectedInput={setSelectedInput}
+          selectedOutput={selectedOutput}
+          setSelectedOutput={setSelectedOutput}
         />
       </TabPanel>
     </StyledContainer>
