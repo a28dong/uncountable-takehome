@@ -81,15 +81,6 @@ const RelationView = (props: IRelationView) => {
       },
     };
 
-    console.log(
-      Object.keys(experiments).map((experiment) => {
-        return {
-          x: experiments[experiment].inputs[selectedInput],
-          y: experiments[experiment].outputs[selectedOutput],
-        };
-      })
-    );
-
     return (
       <RelationWrapper>
         <Scatter options={options} data={data} />
